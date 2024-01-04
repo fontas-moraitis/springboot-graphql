@@ -1,10 +1,6 @@
 scalar Date @specifiedBy(url:"https://tools.ietf.org/html/rfc3339")
 scalar Url @specifiedBy(url:"https://www.w3.org/Addressing/URL/url-spec.txt")
 
-type Query {
-    contents: [Content]
-}
-
 type Content {
     id: ID
     title: String
@@ -14,4 +10,17 @@ type Content {
     dateCreated: Date
     dateUpdated: Date
     url: Url
+}
+
+type PagedContentResponse {
+    contents: [Content]
+    currentPage: Int
+    pageSize: Int
+    totalElements: Int
+    totalPages: Int
+}
+
+type Query {
+    contents: [Content]
+    contentsPaged(page: Int, size: Int): PagedContentResponse
 }
